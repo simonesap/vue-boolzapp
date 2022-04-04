@@ -11,12 +11,12 @@ var app = new Vue(
     {
         el: '#root',
         data: {
-            user: {
-                profilo: {
-                    name: 'Simone',
-                    picture: '_io'
+            user: [
+                {
+                name: 'Simone',
+                picture: '_io'
                 },
-            },
+            ],
             contacts: [
                 {
                     name: 'Michele',
@@ -201,10 +201,51 @@ var app = new Vue(
                     ],
                 }
             ],
+            newMessages: [],
+            newChat: [],
         },
         methods: {
-            
-        }
+            // openChat: function(){
+            //     this.newChat = {
+
+            //     }
+            // }
+
+            newStringUser: function(){
+                let newStringObj = {
+                    date: this.date_function(),
+                    hour: this.showDate(),
+                    message: this.newMessages,
+                    status: 'sent',
+                }
+                if( !this.newMessages == '') {
+                this.newMessagess.push(newStringObj)
+
+                //svuotare l'input dopo aver pushato la nuova todo
+                this.newMessages = ''
+            }
+        
+            // showDate(){
+            // const dateObj = new Date();
+            // const currentDate = dateObj.getDate()+"/"+dateObj.getMonth()+"/"+dateObj.getFullYear();
+            // console.log(currentDate);
+            // }
+        
+     
+            },
+            date_function: function () {
+   
+                var currentDate = new Date();
+                console.log(currentDate);
+      
+                var formatted_date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+                console.log(formatted_date);
+         
+            }
+        },
+            mounted () {
+            this.date_function()
+            }
     },
     
 )

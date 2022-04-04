@@ -18,11 +18,11 @@
                         <!-- colonna sinistra -->
                         <!--Prima sezione con profilo utente-->
                         <div class="d-flex justify-content-between align-items-center border border-dark p-3">
-                            <div class="d-flex align-items-center" v-for="(image,picture) in user">
+                            <div class="d-flex align-items-center" v-for="admin in user">
                                 <!--concatenazione con il template literal-->
                                 <!--oppure: 'stringa' + '' += 'stringa'-->
-                                <img class="rounded-circle img_User me-3" :src="`./img/avatar + ${image.picture} + .jpeg`" alt="profilo">
-                                <span>nome e cognome</span>
+                                <img class="rounded-circle img_User me-3" :src="`./asset/img/avatar${admin.picture}.jpg`" alt="profilo">
+                                <span>{{admin.name}}</span>
                                
                             </div>
                             <div>
@@ -57,16 +57,16 @@
                         <!--Contenitore chat-->
                         <div class="border border-dark">
                             <ul class="list-group list-group-flush">
-                                <li v-for="(account, messages, avatar) in contacts" class="list-group-item d-flex justify-content-between align-items-center">
+                                <li v-for="(account,index) in contacts" @click="openChat" class="list-group-item d-flex justify-content-between align-items-center">
                                     <div class="d-flex align-items-center">
-                                        <img class="rounded-circle img_User me-3" :src="`'./asset/img/avatar' + ${avatar} + '.jpg'`" alt="profilo">
+                                        <img class="rounded-circle img_User me-3" :src="`./asset/img/avatar${account.avatar}.jpg`" alt="profilo">
                                         <div>
                                             <span>{{account.name}}</span>
                                             <span>{{account.messages.date}}</span>
                                         </div>
                                     </div>
-                                    <div>
-                                        <span>{{account.messages.hour}}</span>
+                                    <div v-for="(message,value) in account.messages" @key="index">
+                                        <span>{{message.hour[-1]}}</span>
                                     </div>
                                 </li>
                             </ul>
@@ -78,8 +78,8 @@
                     <div class="col-8 d-flex flex-column justify-content-between">
                         <!--Header colonna destra-->
                         <div class="d-flex justify-content-between align-items-center border border-dark p-3">
-                            <div class="d-flex align-items-center">
-                                <img class="rounded-circle img_User me-3" src="" alt="profilo">
+                            <div class="d-flex align-items-center" v-for="admin in user">
+                                <img class="rounded-circle img_User me-3" :src="`./asset/img/avatar${admin.picture}.jpg`" alt="profilo" v-model="newChat">
                                 <div class="d-flex flex-column">
                                     <span>nome e cognome</span>
                                     <span>Ultimo messaggio inviato</span>
@@ -92,7 +92,7 @@
                                 <i class="fa-solid fa-ellipsis-vertical"></i>
                             </div>
                         </div>
-                        <!--Header colonna destra-->
+                        <!--Corpo della chat-->
                         <div class="sfondo-chats p-3 h-100">
                             <ul class="list-group list-group-flush d-flex flex-column">
                                 <li class="list-group-item rounded-3 sent mb-3 align-self-end">

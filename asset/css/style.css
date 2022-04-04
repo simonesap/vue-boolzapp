@@ -24,7 +24,7 @@ ul {
 }
 
 .sfondo-chats {
-    background-image: url('D:\Users\Utente\Progetti VSCODE\Boolean classe #58\vue-boolzapp\asset\img\mine.jpg');
+    background-image: url('../img/mine.jpg');
 }
 
 .sent {
