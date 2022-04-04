@@ -1,0 +1,40 @@
+.sfondo {
+    height: 100vh;
+    /* Gradient */
+    /* background-image {
+        linear-gradient(to bottom,
+        #009688: 0px,
+        #009688: 15vh,
+        #ddbdj: 15vh,
+        #ddbdj: 100%);
+} */
+}
+
+.img_User {
+    width: 80px;
+    height: 80px;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+ul {
+    margin-left: 0!important;
+}
+
+.sfondo-chats {
+    background-image: url('D:\Users\Utente\Progetti VSCODE\Boolean classe #58\vue-boolzapp\asset\img\mine.jpg');
+}
+
+.sent {
+    background-color: aqua;
+}
+
+.received {
+    background-color: white;
+}
+
+.input-group {
+    align-items: center
+}
