@@ -232,11 +232,73 @@ var app = new Vue(
             //     console.log(day.js().minute);
             //     let minute = day.js().minute;
             // },
-        indexChanged: 0,
+            
+        // indexItem è il mio indice che vale zero,
+        // che uso nella function  
+        indexItem: 0,
+        
+        // Input v-model  
         newChat: '',
+
+        // Array che contiene i nuovi messaggi di input
+        newMessages: [],
+        
+        // Stato di default del mittente
         status: 'sent'
         },
+
         methods: {
+
+            // Funzione che riconosce l'index dell'elemento ciclato
+            // e al click sul tag <li> cambia l'index,
+            // e inserendola nel tag img della chat di destra
+            // mi restituisce l'indice cliccato stampandolo a video
+            lookIndex: function(indexClick){
+                console.log(indexClick);
+                this.indexItem = indexClick;
+                console.log(`l'index cliccato è: ${this.indexItem}`);
+            },
+            
+            
+            // Funzione che collegata al @click, e all'inserimento  di un input
+            // pusha il nuovo testo nell'array newMessages
+            newStringUser: function(index){
+                console.log(index);
+                let newMessage = this.contacts[this.indexItem].messages;
+                if(!this.newChat.length == 0){
+                newMessage.push({
+                date: this.dateMethod(),
+                message: this.newChat,
+                status: 'sent',
+                });
+                this.newChat = '';
+                this.replyOkMethod();
+                }
+                return
+            },
+
+            // Funzione che restituisce una risposta
+            // al messaggio inserito in input con un setTimeout di 3 secondi
+            replyOkMethod: function(){
+                let message = this.contacts[this.indexItem].messages;
+                let dateTime = this.dateMethod()
+                setTimeout(function() {
+                    message.push({
+                    date: dateTime,
+                    message: 'Ok',
+                    status: 'received'
+                });
+                }, 3000);
+            },
+
+            // Funzione per estrarre la data 
+            dateMethod(){
+                let today = new Date().toLocaleDateString();
+                let now = new Date().toLocaleTimeString();
+
+                let date = now + ' ' + today;
+                return date;
+            },
 
             // Funzione per richiamare l'ultimo elemento di un array di oggetti
             // lastHour: function(indexHour){
@@ -244,54 +306,13 @@ var app = new Vue(
             //     this.indexHour = index;
             // },
 
-            // Funzione che riconosce l'index dell'elemento ciclato
-            // e al click sul tag li mi cambia l'index,
-            // e inserendola nel tag img della chat di destra
-            // mi restituisce l'indice cliccato stampandolo a video
-            changeContact: function(indexClick){
-                console.log(indexClick);
-                // Creo la variabile ha come valore il parametro della 
-                // funzione chiamato nel forcioè index
-                this.indexChanged = indexClick;
-                console.log(`l'index è diventato: ${this.indexChanged}`);
-            },
-            
-            
-            newStringUser: function(){
-                let newStringObj = {
-                    date: this.date_function(),
-                    hour: this.showDate(),
-                    message: this.newMessages,
-                    status: 'sent',
-                }
-                if( !this.newMessages == '') {
-                this.newMessagess.push(newStringObj)
 
-                //svuotare l'input dopo aver pushato la nuova todo
-                this.newMessages = ''
-            }
-        
-            // showDate(){
+            // Funzione data e orario
+            // showDate: function(){
             // const dateObj = new Date();
             // const currentDate = dateObj.getDate()+"/"+dateObj.getMonth()+"/"+dateObj.getFullYear();
             // console.log(currentDate);
             // }
-        
-     
-            },
-            date_function: function () {
-   
-                var currentDate = new Date();
-                console.log(currentDate);
-      
-                var formatted_date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
-                console.log(formatted_date);
-         
-            }
         },
-            mounted () {
-            this.date_function()
-            }
-    },
-    
+    }
 )

@@ -57,18 +57,14 @@
                         <!--Contenitore chat-->
                         <div class="border border-dark">
                             <ul class="list-group list-group-flush">
-                                <li v-for="(account,index) in contacts" role="button" @click="changeContact(index)" class="list-group-item d-flex justify-content-between align-items-center">
+                                <li v-for="(account,index) in contacts" role="button" @click="lookIndex(index)" class="list-group-item d-flex justify-content-between align-items-center">
                                     <div class="d-flex align-items-center">
                                         <img class="rounded-circle img_User me-3" :src="`./asset/img/avatar${account.avatar}.jpg`" alt="profilo">
-                                        <div>
-                                            <span>{{account.name}}</span>
-                                        </div>
-                                        <div>
-                                            <span>Ultimo messaggio inviato {{account.hour}}</span>
-                                        </div>
+                                        <span>{{account.name}}</span>
+                                        <span>Ultimo messaggio inviato {{account.messages[indexItem].date}}</span>
                                     </div>
-                                    <div v-for="(element,index) in account.messages" @key="index">
-                                        <span>{{element.hour}}</span>
+                                    <div>
+                                        <span>{{account.messages[indexItem].hour}}</span>
                                     </div>
                                 </li>
                             </ul>
@@ -81,10 +77,10 @@
                         <!--Header colonna destra-->
                         <div class="d-flex justify-content-between align-items-center border border-dark p-3">
                             <div class="d-flex align-items-center">
-                                <img class="rounded-circle img_User me-3" :src="`./asset/img/avatar${contacts[indexChanged].avatar}.jpg`" alt="profilo">
+                                <img class="rounded-circle img_User me-3" :src="`./asset/img/avatar${contacts[indexItem].avatar}.jpg`" alt="profilo">
                                 <div class="d-flex flex-column">
-                                    <span>nome e cognome</span>
-                                    <span>Ultimo messaggio inviato</span>
+                                    <span>{{contacts[indexItem].name}}</span>
+                                    <span>Ultimo messaggio inviato: {{contacts[indexItem].messages[indexItem].date}}</span>
                                 </div>
                                
                             </div>
@@ -98,12 +94,10 @@
                         <div class="sfondo-chats over_flow p-3 h-100 over_flow">
                             <ul class="list-group list-group-flush d-flex flex-column">
                                 <li class="list-group-item d-flex flex-column rounded-3 sent mb-3"
-                                    v-for="(element,index) in contacts[indexChanged].messages"
+                                    v-for="(element,index) in contacts[indexItem].messages"
                                     :class="(element.status == 'sent') ? 'align-self-end sent' : 'align-self-start recived'">
                                         {{element.message}}
-                                    <div>
                                         <p class="">{{element.hour}}</p>
-                                    </div>
                                     
                                 </li>
                                 
@@ -114,7 +108,7 @@
                         <div>
                             <div class="input-group input-group-sm mb-3">
                                 <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fa-solid fa-magnifying-glass"></i></span>
-                                <input type="text" @keyup.enter='newChat' v:model="newChat" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                <input type="text" @keyup.enter='newStringUser(index)' v:model="newChat" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                                 <div class="p-3">
                                     <i class="fa-solid fa-microphone"></i>
                                 </div>
