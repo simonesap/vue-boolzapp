@@ -39,7 +39,7 @@ var app = new Vue(
             user: [
                 {
                 name: 'Simone',
-                picture: '_io'
+                picture: '_2'
                 },
             ],
             // contacts[indexOggetto].messages.message 
