@@ -1,14 +1,14 @@
 .sfondo {
     height: 100vh;
     /* Gradient */
-    /* background-image {
+    background-image:
         linear-gradient(to bottom,
-        #009688: 0px,
-        #009688: 15vh,
-        #ddbdj: 15vh,
-        #ddbdj: 100%);
-} */
+        rgba(53,149,137,255) 0vh,
+        rgba(53,149,137,255) 15vh,
+        rgb(236, 231, 231) 15vh,
+        rgb(219, 212, 212) 100vh);
 }
+
 
 .img_User {
     width: 80px;
@@ -28,7 +28,7 @@ ul {
 }
 
 .sent {
-    background-color: aqua;
+    background-color: rgba(153,218,253,255);
 }
 
 .received {
@@ -37,4 +37,8 @@ ul {
 
 .input-group {
     align-items: center
+}
+
+.over_flow {
+    overflow: auto;
 }
