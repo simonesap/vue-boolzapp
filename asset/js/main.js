@@ -262,14 +262,6 @@ var app = new Vue(
                 this.counter = indexClick;
                 console.log(`l'index cliccato è: ${this.counter}`);
             },
-
-            // Funzione che riconosce l'ultimo elemento di un array
-            // lookLastIndex: function(indexClick){
-            //     console.log(indexClick);
-            //     this.counter = indexClick;
-            //     console.log(`l'index cliccato è: ${this.counter[-1]}`);
-            // },
-            
             
             // Funzione che collegata al @click, e all'inserimento  di un input
             // pusha il nuovo testo nell'array newMessages
@@ -304,6 +296,7 @@ var app = new Vue(
                     }, 3000);
             },
 
+            // Funzione che riconosce lettere gia inserite nella barra di ricerca a sinistra
             searchMethod: function(){
                 this.contacts.forEach(
                     (user) => {
@@ -316,6 +309,7 @@ var app = new Vue(
                 );
             },
 
+            // Funzione hover sull'elemento
             mouseOver: function(){
                 if(this.active = !this.active){
                     this.active = true;
@@ -323,7 +317,35 @@ var app = new Vue(
                     this.active = false
                 }
             },
+
+            // Funzione che telimina un messaggio dalla chat
+            removeMessage: function(index) {
+                //splice
+                //elemento in base alla posizione dell'indice, quanti
+                //elementi togliere da quella posizione
+                
+                // this.contacts[this.counter].messages[this.counter].message.splice( index, 1 );
+                
+                // return
+
+                if(confirm(`Confermi di voler eliminare il messaggio? "${this.contacts[this.counter].messages[this.mouseOver()].message}"`)){
         
+                }
+                this.contacts[this.mouseOver(index)].messages[this.mouseOver(index)].message.splice(this.mouseOver(index), 1);
+                
+                console.log('message',message)
+                console.log(index);
+            },
+        
+
+
+
+            // Funzione che riconosce l'ultimo elemento di un array
+            // lookLastIndex: function(indexClick){
+            //     console.log(indexClick);
+            //     this.counter = indexClick;
+            //     console.log(`l'index cliccato è: ${this.counter[-1]}`);
+            // },
 
             // counterLength: function(index){
             //     if(this.counter){

@@ -89,7 +89,7 @@
                             </div>
                         </div>
                         <!--Corpo delle chats-->
-                        <div class="sfondo-chats over_flow p-3 h-100 over_flow">
+                        <div class="sfondo-chats p-3 h-100 over_flow">
                             <ul class="list-group list-group-flush d-flex flex-column">
                                 <li class="list-group-item d-flex flex-column rounded-3 sent mb-3"
                                     v-for="(element,index) in contacts[counter].messages"
@@ -97,23 +97,32 @@
                                         <div>
                                             {{element.message}}
                                             <i class="fa-solid fa-angle-down"
+                                               role="button"
                                                @mouseover="mouseOver"
-                                               @mouseleave="active = false">
+                                               @mouseleave="active = false"
+                                               >
                                             </i>
                                         </div>
                                         
                                         <p class="">{{element.hour}}</p>
                                 </li>
-                                <div class="pop rounded-3" 
-                                     v-show="active"
-                                     
-                                     >
-                                    <div role="button"
-                                         v-if="(contacts[counter].messages[counter].status == 'sent') ? 'align-self-end' : 'align-self-start'">Info Messaggio</div>
-                                    <div role="button">Cancella messaggio</div>
-                                </div>
-                                
+                                <li class="list-group-item d-flex flex-column mb-3"
+                                    :class="(contacts[counter].messages[counter].status == 'sent') ? 'align-self-end' : 'align-self-start'"
+                                    >
+                                    <div class="pop shadow-lg" 
+                                         v-show="active"
+                                         >
+                                         <div class="p-2" role="button">Message info</div>
+                                         <div class="p-2" 
+                                              role="button"
+                                              @click="removeMessage"      
+                                              >
+                                              Delete message
+                                        </div>
+                                    </div>
+                                </li>
                             </ul>
+                            
                         </div>
                         
                         <!--Footer colonna destra-->
