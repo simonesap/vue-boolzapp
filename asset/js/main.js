@@ -229,23 +229,27 @@ var app = new Vue(
                 }
             ],
             // created() {
-            //     console.log(day.js().minute);
-            //     let minute = day.js().minute;
+            //     
             // },
             
-        // indexItem è il mio indice che vale zero,
-        // che uso nella function  
-        indexItem: 0,
-        
-        // Input v-model  
-        newChat: '',
+            // Counter è il mio indice che vale zero,
+            // che uso nella function  
+            counter: 0,
 
-        // Array che contiene i nuovi messaggi di input
-        newMessages: [],
-        
-        // Stato di default del mittente
-        status: 'sent'
-        },
+            counterIndex: -1,
+            
+            // Input v-model barra inserimento messaggio chat colonna destra 
+            newChat: '',
+            
+            // Stato di default del mittente
+            status: 'sent',
+
+            // Input v-model barra ricerca colonna sinistra
+            newSearch: '',
+
+            // Stato di default dell'active per mostrare le info all'hover del messaggio
+            active: false,
+            },
 
         methods: {
 
@@ -255,50 +259,111 @@ var app = new Vue(
             // mi restituisce l'indice cliccato stampandolo a video
             lookIndex: function(indexClick){
                 console.log(indexClick);
-                this.indexItem = indexClick;
-                console.log(`l'index cliccato è: ${this.indexItem}`);
+                this.counter = indexClick;
+                console.log(`l'index cliccato è: ${this.counter}`);
             },
+
+            // Funzione che riconosce l'ultimo elemento di un array
+            // lookLastIndex: function(indexClick){
+            //     console.log(indexClick);
+            //     this.counter = indexClick;
+            //     console.log(`l'index cliccato è: ${this.counter[-1]}`);
+            // },
             
             
             // Funzione che collegata al @click, e all'inserimento  di un input
             // pusha il nuovo testo nell'array newMessages
             newStringUser: function(index){
-                console.log(index);
-                let newMessage = this.contacts[this.indexItem].messages;
-                if(!this.newChat.length == 0){
-                newMessage.push({
-                date: this.dateMethod(),
-                message: this.newChat,
-                status: 'sent',
-                });
-                this.newChat = '';
-                this.replyOkMethod();
+                // Grazie alla libreria Day.js di Vue dichiaro date ed orario direttamente 
+                // nella funzione senza creare un metodo esterno 
+                let todayDate = dayjs().format('DD/MM/YYYY');
+                let hour = dayjs().format('hour');
+                let minute = dayjs().format('minute');
+
+                // Creo il nuovo oggetto da pushare nell'array di oggetti padre messages
+                let newMessagesSent = {
+                    date: `${todayDate} ${hour} ${minute}`,
+                    message: this.newChat,
+                    status: 'sent',
                 }
-                return
+
+                let newMessagesReceived = {
+                    date: `${todayDate} ${hour} ${minute}`,
+                    message: 'Ok Rick!',
+                    status: 'received',
+                }
+
+                this.contacts[this.counter].messages.push(newMessagesSent);
+
+                this.newChat = '';
+
+                // Funzione setTimeout che inserisco direttamente nella funzione
+                setTimeout(
+                    () => {
+                        this.contacts[this.counter].messages.push(newMessagesReceived)
+                    }, 3000);
             },
+
+            searchMethod: function(){
+                this.contacts.forEach(
+                    (user) => {
+                        if(user.name.toLowerCase().includes(this.newSearch.toLowerCase())){
+                            this.user.visible = true;
+                        } 
+                            this.user.visible = false;
+                            return
+                    } 
+                );
+            },
+
+            mouseOver: function(){
+                if(this.active = !this.active){
+                    this.active = true;
+                }  else {
+                    this.active = false
+                }
+            },
+        
+
+            // counterLength: function(index){
+            //     if(this.counter){
+            //       return counter.length[-1]
+            //     }
+            //     return '';
+            //   },
+
+            // Funzione che mi permette di controllare se visible è true o false
+            // dando v-b-visible="visibleHandler" al tag html
+            // visibleHandler(isVisible) {
+            //     if (isVisible) {
+            //       // Do something
+            //     } else {
+            //       // Do something else
+            //     }
+            //   },
 
             // Funzione che restituisce una risposta
             // al messaggio inserito in input con un setTimeout di 3 secondi
-            replyOkMethod: function(){
-                let message = this.contacts[this.indexItem].messages;
-                let dateTime = this.dateMethod()
-                setTimeout(function() {
-                    message.push({
-                    date: dateTime,
-                    message: 'Ok',
-                    status: 'received'
-                });
-                }, 3000);
-            },
+            // replyOkMethod: function(){
+            //     let message = this.contacts[this.counter].messages;
+            //     let dateTime = this.dateMethod();
+            //     setTimeout(function() {
+            //         message.push({
+            //         date: dateTime,
+            //         message: 'Ok',
+            //         status: 'received'
+            //     });
+            //     }, 3000);
+            // },
 
             // Funzione per estrarre la data 
-            dateMethod(){
-                let today = new Date().toLocaleDateString();
-                let now = new Date().toLocaleTimeString();
+            // dateMethod(){
+            //     let today = new Date().toLocaleDateString();
+            //     let now = new Date().toLocaleTimeString();
 
-                let date = now + ' ' + today;
-                return date;
-            },
+            //     let date = now + ' ' + today;
+            //     return date;
+            // },
 
             // Funzione per richiamare l'ultimo elemento di un array di oggetti
             // lastHour: function(indexHour){

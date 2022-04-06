@@ -43,28 +43,27 @@
                         </div>
                         <!--Cerca-->
                         <div class="d-flex justify-content-center align-items-center border border-dark p-2">
-                            <!-- <div class="p-2 border border-dark">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </div>
-                            <div>
-                                <input type="text" placeholder="Cerca o inizia una nuova chat">
-                            </div> -->
                             <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fa-solid fa-magnifying-glass"></i></span>
-                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                <span class="input-group-text" role="button" id="inputGroup-sizing-sm"><i class="fa-solid fa-magnifying-glass"></i></span>
+                                <input type="text" class="form-control" placeholder="Cerca o inizia una nuova chat" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+                                       v-model="newSearch"
+                                       @keyup="searchMethod"
+                                       >
                             </div>
                         </div>
                         <!--Contenitore chat-->
-                        <div class="border border-dark">
+                        <div class="border border-dark over_flow">
                             <ul class="list-group list-group-flush">
                                 <li v-for="(account,index) in contacts" role="button" @click="lookIndex(index)" class="list-group-item d-flex justify-content-between align-items-center">
                                     <div class="d-flex align-items-center">
                                         <img class="rounded-circle img_User me-3" :src="`./asset/img/avatar${account.avatar}.jpg`" alt="profilo">
-                                        <span>{{account.name}}</span>
-                                        <span>Ultimo messaggio inviato {{account.messages[indexItem].date}}</span>
+                                        <div class="d-flex flex-column">
+                                            <span>{{account.name}}</span>
+                                            <span>Ultimo messaggio inviato: </span>
+                                        </div>
                                     </div>
                                     <div>
-                                        <span>{{account.messages[indexItem].hour}}</span>
+                                        <span>orario</span>
                                     </div>
                                 </li>
                             </ul>
@@ -75,14 +74,13 @@
                     <!-- colonna destra -->
                     <div class="col-8 d-flex flex-column justify-content-between">
                         <!--Header colonna destra-->
-                        <div class="d-flex justify-content-between align-items-center border border-dark p-3">
+                        <div class="d-flex align-items-center justify-content-between border border-dark p-3">
                             <div class="d-flex align-items-center">
-                                <img class="rounded-circle img_User me-3" :src="`./asset/img/avatar${contacts[indexItem].avatar}.jpg`" alt="profilo">
+                                <img class="rounded-circle img_User me-3" :src="`./asset/img/avatar${contacts[counter].avatar}.jpg`" alt="profilo">
                                 <div class="d-flex flex-column">
-                                    <span>{{contacts[indexItem].name}}</span>
-                                    <span>Ultimo messaggio inviato: {{contacts[indexItem].messages[indexItem].date}}</span>
+                                    <span>{{contacts[counter].name}}</span>
+                                    <span>Ultimo messaggio inviato: </span>
                                 </div>
-                               
                             </div>
                             <div>
                                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -90,16 +88,30 @@
                                 <i class="fa-solid fa-ellipsis-vertical"></i>
                             </div>
                         </div>
-                        <!--Corpo della chat-->
+                        <!--Corpo delle chats-->
                         <div class="sfondo-chats over_flow p-3 h-100 over_flow">
                             <ul class="list-group list-group-flush d-flex flex-column">
                                 <li class="list-group-item d-flex flex-column rounded-3 sent mb-3"
-                                    v-for="(element,index) in contacts[indexItem].messages"
-                                    :class="(element.status == 'sent') ? 'align-self-end sent' : 'align-self-start recived'">
-                                        {{element.message}}
+                                    v-for="(element,index) in contacts[counter].messages"
+                                    :class="(element.status == 'sent') ? 'align-self-end sent' : 'align-self-start received'">
+                                        <div>
+                                            {{element.message}}
+                                            <i class="fa-solid fa-angle-down"
+                                               @mouseover="mouseOver"
+                                               @mouseleave="active = false">
+                                            </i>
+                                        </div>
+                                        
                                         <p class="">{{element.hour}}</p>
-                                    
                                 </li>
+                                <div class="pop rounded-3" 
+                                     v-show="active"
+                                     
+                                     >
+                                    <div role="button"
+                                         v-if="(contacts[counter].messages[counter].status == 'sent') ? 'align-self-end' : 'align-self-start'">Info Messaggio</div>
+                                    <div role="button">Cancella messaggio</div>
+                                </div>
                                 
                             </ul>
                         </div>
@@ -108,7 +120,10 @@
                         <div>
                             <div class="input-group input-group-sm mb-3">
                                 <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fa-solid fa-magnifying-glass"></i></span>
-                                <input type="text" @keyup.enter='newStringUser(index)' v:model="newChat" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+                                       v-model="newChat"       
+                                       @keyup.enter='newStringUser' 
+                                       >
                                 <div class="p-3">
                                     <i class="fa-solid fa-microphone"></i>
                                 </div>

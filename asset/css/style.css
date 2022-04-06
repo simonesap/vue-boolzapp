@@ -1,3 +1,7 @@
+:root {
+    --back-white: white;
+}
+
 .sfondo {
     height: 100vh;
     /* Gradient */
@@ -8,7 +12,6 @@
         rgb(236, 231, 231) 15vh,
         rgb(219, 212, 212) 100vh);
 }
-
 
 .img_User {
     width: 80px;
@@ -32,7 +35,7 @@ ul {
 }
 
 .received {
-    background-color: white;
+    background-color: var(--back-white);
 }
 
 .input-group {
@@ -40,5 +43,9 @@ ul {
 }
 
 .over_flow {
-    overflow: auto;
+    overflow-y: auto;
+}
+
+.pop {
+    background-color: var(--back-white);
 }
