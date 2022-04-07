@@ -1,5 +1,7 @@
 :root {
     --back-white: white;
+    --webkit-border-radius:50%;
+    --webkit-border-radius:4px;
 }
 
 .sfondo {
@@ -34,7 +36,11 @@ ul {
     background-color: rgba(216,248,191,255);
 }
 
-.received {
+.received,
+.col-4,
+.pop,
+.chatBox,
+.searchIcon {
     background-color: var(--back-white);
 }
 
@@ -42,10 +48,73 @@ ul {
     align-items: center
 }
 
-.over_flow {
-    overflow-y: auto;
+.cc_gray {
+    background-color: rgba(233,234,237,255);
 }
 
-.pop {
-    background-color: var(--back-white);
+.c_gray {
+    color: gray;
 }
+
+.col-4 {
+    padding-right: 0!important;
+    padding-left: 0!important;
+}
+
+.col-8 {
+    padding-right: 0!important;
+    padding-left: 0!important;
+}
+
+.bg_info {
+    background-color: rgba(153,218,253,255);
+}
+
+.text_info {
+    color: rgba(153,218,253,255);
+}
+
+.fs_5 {
+    font-size: 1em;
+}
+
+.h_100 {
+    height: 100%;
+}
+
+.h_100vh {
+    height: 100vh;
+}
+
+/* Custom Scrollbar Chrome */
+/* ::-webkit-scrollbar{
+    width:0.5em;
+    height:0.5em;
+background: #eaeaea;
+margin-right: 10px;
+}
+::-webkit-scrollbar:hover{
+    background-color:# eaeaea ;
+border: none;
+}
+::-webkit-resizer{
+    border-radius: var(--webkit-border-radius);
+    background-color:#ccc;
+border: none;
+}
+::-webkit-scrollbar-thumb{
+    min-height:0.8em;
+    min-width:0.8em;
+    border-radius: var(--webkit-border-radius);
+    border: none;
+}
+::-webkit-scrollbar-thumb:hover{
+    background-color: gray;
+    border: none;
+}
+::-webkit-scrollbar-thumb:active{
+    background-color: rgb(128, 128, 128);
+    border: none;
+} */
+
+  

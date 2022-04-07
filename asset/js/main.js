@@ -318,7 +318,7 @@ var app = new Vue(
                 }
             },
 
-            // Funzione che telimina un messaggio dalla chat
+            // Funzione che elimina un messaggio dalla chat
             removeMessage: function(index) {
                 //splice
                 //elemento in base alla posizione dell'indice, quanti

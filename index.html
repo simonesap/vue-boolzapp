@@ -14,56 +14,56 @@
         <div class="sfondo py-5">
             <div class="container h-100 bg-white">
                 <div class="row h-100">
-                    <div class="col-4">
+                    <div class="col-4 h-100 border-end">
                         <!-- colonna sinistra -->
                         <!--Prima sezione con profilo utente-->
-                        <div class="d-flex justify-content-between align-items-center border border-dark p-3">
+                        <div class="d-flex cc_gray justify-content-between align-items-center p-3">
                             <div class="d-flex align-items-center" v-for="admin in user">
                                 <!--concatenazione con il template literal-->
                                 <!--oppure: 'stringa' + '' += 'stringa'-->
                                 <img class="rounded-circle img_User me-3" :src="`./asset/img/avatar${admin.picture}.jpg`" :alt="`Immagine profilo di ${admin.name}`">
-                                <span>{{admin.name}}</span>
+                                <span class="fs-5">{{admin.name}}</span>
                                
                             </div>
                             <div>
-                                <i class="fa-solid fa-circle-notch"></i>
-                                <i class="fa-solid fa-message"></i>
-                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                                <i class="fa-solid me-2 c_gray fa-circle-notch" role="button"></i>
+                                <i class="fa-solid me-2 c_gray fa-message" role="button"></i>
+                                <i class="fa-solid me-2 c_gray fa-ellipsis-vertical" role="button"></i>
                             </div>
                         </div>
                         <!--Seconda sezione con notifiche-->
-                        <div class="d-flex align-items-center border border-dark bg-info p-3">
-                            <div class="border border-dark rounded-circle p-2 bg-white">
-                                <i class="fa-solid fa-bell-slash text-info me-3"></i>
+                        <div class="d-flex align-items-center bg_info p-3">
+                            <div class="me-3 rounded-circle p-2 searchIcon">
+                                <i class="fa-solid fa-bell-slash fs-4 text_info" role="button"></i>
                             </div>
                             <div>
-                                <p>ricevi notifiche di nuovi messaggi</p>
-                                <p>ottieni notifiche testo</p>
+                                <p>Ricevi notifiche di nuovi messaggi.</p>
+                                <a class="c_gray" role="button">Attiva notifiche testo.</a>
                             </div>
                         </div>
                         <!--Cerca-->
-                        <div class="d-flex justify-content-center align-items-center border border-dark p-2">
+                        <div class="d-flex justify-content-center align-items-center p-2">
                             <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" role="button" id="inputGroup-sizing-sm"><i class="fa-solid fa-magnifying-glass"></i></span>
-                                <input type="text" class="form-control" placeholder="Cerca o inizia una nuova chat" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+                                <span class="input-group-text searchIcon" role="button" id="inputGroup-sizing-sm"><i class="fa-solid p-1 fa-magnifying-glass"></i></span>
+                                <input type="text" class="form-control searchIcon" placeholder="Cerca o inizia una nuova chat" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
                                        v-model="newSearch"
                                        @keyup="searchMethod"
                                        >
                             </div>
                         </div>
                         <!--Contenitore chat-->
-                        <div class="border border-dark over_flow">
+                        <div class="h-75 overflow-auto">
                             <ul class="list-group list-group-flush">
-                                <li v-for="(account,index) in contacts" role="button" @click="lookIndex(index)" class="list-group-item d-flex justify-content-between align-items-center">
+                                <li v-for="(account,index) in contacts" role="button" @click="`${lookIndex(index)}${'col_gray'}`" class="list-group-item chatBox d-flex justify-content-between align-items-center">
                                     <div class="d-flex align-items-center">
                                         <img class="rounded-circle img_User me-3" :src="`./asset/img/avatar${account.avatar}.jpg`" alt="profilo">
                                         <div class="d-flex flex-column">
-                                            <span>{{account.name}}</span>
-                                            <span>Ultimo messaggio inviato: </span>
+                                            <span class="fs-5">{{account.name}}</span>
+                                            <span class="c_gray fs_5">Ultimo messaggio inviato: </span>
                                         </div>
                                     </div>
                                     <div>
-                                        <span>orario</span>
+                                        <span class="c_gray fs_5">orario</span>
                                     </div>
                                 </li>
                             </ul>
@@ -72,26 +72,26 @@
                     </div>
 
                     <!-- colonna destra -->
-                    <div class="col-8 d-flex flex-column justify-content-between">
+                    <div class="col-8 d-flex flex-column justify-content-between h_100vh">
                         <!--Header colonna destra-->
-                        <div class="d-flex align-items-center justify-content-between border border-dark p-3">
+                        <div class="d-flex align-items-center cc_gray justify-content-between p-3">
                             <div class="d-flex align-items-center">
                                 <img class="rounded-circle img_User me-3" :src="`./asset/img/avatar${contacts[counter].avatar}.jpg`" alt="profilo">
                                 <div class="d-flex flex-column">
-                                    <span>{{contacts[counter].name}}</span>
-                                    <span>Ultimo messaggio inviato: </span>
+                                    <span class="fs-5">{{contacts[counter].name}}</span>
+                                    <span class="c_gray fs_5">Ultimo messaggio inviato: </span>
                                 </div>
                             </div>
                             <div>
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                                <i class="fa-solid fa-message"></i>
-                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                                <i class="fa-solid c_gray me-2 fa-magnifying-glass" role="button"></i>
+                                <i class="fa-solid c_gray me-2 fa-message" role="button"></i>
+                                <i class="fa-solid c_gray me-2 fa-ellipsis-vertical" role="button"></i>
                             </div>
                         </div>
                         <!--Corpo delle chats-->
-                        <div class="sfondo-chats p-3 h-100 over_flow">
+                        <div class="sfondo-chats p-3 h-75 overflow-auto">
                             <ul class="list-group list-group-flush d-flex flex-column">
-                                <li class="list-group-item d-flex flex-column rounded-3 sent mb-3"
+                                <li class="list-group-item mx-5 d-flex flex-column rounded-3 sent mb-3"
                                     v-for="(element,index) in contacts[counter].messages"
                                     :class="(element.status == 'sent') ? 'align-self-end sent' : 'align-self-start received'">
                                         <div>
@@ -127,14 +127,15 @@
                         
                         <!--Footer colonna destra-->
                         <div>
-                            <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fa-solid fa-magnifying-glass"></i></span>
-                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+                            <div class="input-group cc_gray input-group-sm mb-3">
+                                <span class="input-group-text searchIcon ms-2" id="inputGroup-sizing-sm"><i class="fa-regular p-1 fa-face-smile" role="button"></i></span>
+                                <input type="text" class="form-control searchIcon" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+                                       placeholder="Scrivi messaggio.."
                                        v-model="newChat"       
                                        @keyup.enter='newStringUser' 
                                        >
                                 <div class="p-3">
-                                    <i class="fa-solid fa-microphone"></i>
+                                    <i class="fa-solid fa-microphone p-1 me-2 fs-5" role="button"></i>
                                 </div>
                             </div>
                         </div>
